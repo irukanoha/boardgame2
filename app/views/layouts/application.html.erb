@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Boardgame2</title>
+    <title>boardgame2</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Unica+One::latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="header">
+      <div class="logo">
+        <a class="h1" href="/">
+          <span class="image">
+            <img alt="ロゴ" src="boardgame-logo.png">
+          </span>
+        </a>
+      <ul class="menubox">
+        <li class="menubox__gaelist"><a class="menu-btn" href="/items">ゲーム一覧</a></li>
+      </ul>
+      <% if user_signed_in? %>
+          <div class="user_nav grid-6">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to  "投稿する", "/tweets/new", class: "post" %>
+          </div>
+        <% else %>
+          <div class="grid-6">
+            <%= link_to "ログイン", new_user_session_path, class: 'post' %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+          </div>
+        <% end %>
+    </header>
+    <div class="main">
+      <div class="mainbox">
+        <%= yield %>
+      </div>
+    </div>
+    <footer>
+      <p><small>Copyright boardgame review 2020.</small></p>
+    </footer>
   </body>
 </html>
