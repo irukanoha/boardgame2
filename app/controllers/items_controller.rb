@@ -6,11 +6,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-  end
-  
-  private
-  def item_params
-    params.reqire(:item).permit(:name, :image, :people, :age, :time, :rule)
+    @items = @item.reviews.includes(:user)
   end
 
 end
