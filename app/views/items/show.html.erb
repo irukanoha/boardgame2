@@ -18,10 +18,11 @@
       <%if user_signed_in?%>
         <div class="reviews">
           <%= link_to "レビューを投稿する", "/items/#{@item.id}/reviews/new", class: "review" %>
+          <%# <%= link_to "レビューを見る", "/", class: "review_list_link" %> 
         </div>
       <% else %>
         <div class="reviews_list">
-          <%= link_to "レビューを見る", "/", class: "review_list_link" %>
+          <small>※レビュー投稿はログインすると可能になります。</small>
         </div>
       <% end %>
     </div>
@@ -31,5 +32,17 @@
     <%# <iframe width="640" height="365" src="https://youtu.be/yGP4lCVvCO4" frameborder="0" allowfullscreen="allowfullscreen" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="">
     </iframe> %>
 <%# ここのURLはmp４ファイルを/public/videos/mp4にして表示 %>
+  <div class="game_review">
+    <h4>＜レビュー＞</h4>
+      <% if @reviews %>
+        <% @reviews.each do |review| %>
+          <p>
+            <strong><%= link_to review.user.nickname, "/users/#{review.user_id}" %>：</strong>
+            <%= review.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 </html>
