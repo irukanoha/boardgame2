@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="styleseet" href="review.scss">
+</head>
+
 <div class="reviewbox">
   <h1>レビュー作成</h1>
 </div>
+
+<%= form_with(model: [@item,@review], url: item_reviews_path, class: :form, local: true) do |form| %>
+  <%= form.text_area :text, placeholder: :感想, class: :form__text %>
+  <%= form.submit '投稿する', class: :form__btn %>
+<% end %>
+
+</html>
