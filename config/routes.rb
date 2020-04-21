@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root "homes#index"
   resources :items, only: [:index, :show] do
     resources :reviews, only: [:new, :create, :show]
+    resources :likes, only: [:create, :destroy]
   end
 end
